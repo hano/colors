@@ -21,7 +21,7 @@
 
     var colorContainer = document.getElementById('color-container');
 
-    var touchstart = function(){
+    var touchstart = function(ev){
         down = true;
 
         var timeout = setTimeout(function(){
@@ -34,6 +34,9 @@
                 clearTimeout(timeout);
             }
         }, 1000);
+        ev.stopPropagation();
+        ev.preventDefault();
+        return false;
     };
 
     var touchend = function(){
