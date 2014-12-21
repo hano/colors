@@ -34,9 +34,6 @@
                 clearTimeout(timeout);
             }
         }, 1000);
-        ev.stopPropagation();
-        ev.preventDefault();
-        return false;
     };
 
     var touchend = function(){
