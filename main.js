@@ -40,7 +40,6 @@
     };
 
     var touchend = function(){
-        console.log('end');
         down = false;
     };
 
