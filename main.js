@@ -11,16 +11,61 @@
         colorContainer.appendChild(div);
     });
 
-    document.addEventListener('click', function( ev ) {
-        alert(ev.target.style.backgroundColor + ' ' + ev.target.getAttribute('data'));
-    });
-
-    var totalHeight = (colors.length - 1) * document.querySelectorAll('#color-container div')[0].clientHeight;
-
     document.addEventListener('scroll', function( ev ) {
         if( ((window.innerHeight + window.scrollY) - document.body.offsetHeight) >= -10 ) {
             window.scroll(0, 0);
         }
     });
 
+    var down = false;
+
+    var colorContainer = document.getElementById('color-container');
+
+    var touchstart = function(){
+        down = true;
+
+        var timeout = setTimeout(function(){
+            if(down){
+                if(colorContainer.classList.length === 0){
+                    colorContainer.classList.add('animated');
+                } else {
+                    colorContainer.classList.remove('animated');
+                }
+                clearTimeout(timeout);
+            }
+        }, 1000);
+    };
+
+    var touchend = function(){
+        down = false;
+    };
+
+    document.addEventListener('touchstart', function( ev ) {
+        touchstart();
+    });
+
+    document.addEventListener('touchend', function( ev ) {
+        touchend();
+    });
+
+    document.addEventListener('mousedown', function( ev ) {
+        touchstart();
+    });
+
+    document.addEventListener('mouseup', function( ev ) {
+        touchend();
+    });
+
 })();
+
+window.printKeyFrames = function(){
+    var colors = ["#D98282","#D98782","#D98C82","#D99082","#D99582","#D99A82","#D99E82","#D9A382","#D9A882","#D9AD82","#D9B182","#D9B682","#D9BB82","#D9C082","#D9C482","#D9C982","#D9CE82","#D9D282","#D9D782","#D6D982","#D1D982","#CCD982","#C7D982","#C3D982","#BED982","#B9D982","#B4D982","#B0D982","#ABD982","#A6D982","#A2D982","#9DD982","#98D982","#93D982","#8FD982","#8AD982","#85D982","#82D984","#82D988","#82D98D","#82D992","#82D997","#82D99B","#82D9A0","#82D9A5","#82D9A9","#82D9AE","#82D9B3","#82D9B8","#82D9BC","#82D9C1","#82D9C6","#82D9CB","#82D9CF","#82D9D4","#82D9D9","#82D4D9","#82CFD9","#82CBD9","#82C6D9","#82C1D9","#82BCD9","#82B8D9","#82B3D9","#82AED9","#82A9D9","#82A5D9","#82A0D9","#829BD9","#8297D9","#8292D9","#828DD9","#8288D9","#8284D9","#8582D9","#8A82D9","#8F82D9","#9382D9","#9882D9","#9D82D9","#A282D9","#A682D9","#AB82D9","#B082D9","#B482D9","#B982D9","#BE82D9","#C382D9","#C782D9","#CC82D9","#D182D9","#D682D9","#D982D7","#D982D2","#D982CE","#D982C9","#D982C4","#D982C0","#D982BB","#D982B6","#D982B1","#D982AD","#D982A8","#D982A3","#D9829E","#D9829A","#D98295","#D98290","#D9828C","#D98287","#D98282"];
+    var keyFrames = '';
+
+    for(var i=0; i<=100; i++){
+        var val  = 'linear-gradient(to bottom, ' + colors[i] + ' 0%,' + colors[i+10] + ' 100%)';
+        keyFrames += i + '% { background: ' + val +'; }\n';
+    }
+
+    console.log(keyFrames);
+};
