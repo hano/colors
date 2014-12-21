@@ -26,10 +26,10 @@
 
         var timeout = setTimeout(function(){
             if(down){
-                if(colorContainer.classList.length === 0){
-                    colorContainer.classList.add('animated');
+                if(colorContainer.className.indexOf('animated') < 0){
+                    colorContainer.className += 'animated';
                 } else {
-                    colorContainer.classList.remove('animated');
+                    colorContainer.className = '';
                 }
                 clearTimeout(timeout);
             }
@@ -40,24 +40,17 @@
     };
 
     var touchend = function(){
+        console.log('end');
         down = false;
     };
 
-    document.addEventListener('touchstart', function( ev ) {
-        touchstart();
-    });
+    document.addEventListener('touchstart', touchstart);
 
-    document.addEventListener('touchend', function( ev ) {
-        touchend();
-    });
+    document.addEventListener('touchend', touchend);
 
-    document.addEventListener('mousedown', function( ev ) {
-        touchstart();
-    });
+    document.addEventListener('mousedown', touchstart);
 
-    document.addEventListener('mouseup', function( ev ) {
-        touchend();
-    });
+    document.addEventListener('mouseup', touchend);
 
 })();
 
