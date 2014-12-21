@@ -1,0 +1,13 @@
+CACHE MANIFEST
+
+CACHE:
+index.html
+main.js
+styles.css
+manifest.json
+
+NETWORK:
+*
+
+SETTINGS:
+fast
